@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main>
+    <div class="newsletter-card">
+
+      <div class="newsletter-card__image"></div>
+
+      <div class="newsletter-card__body">
+
+        <h1 class="newsletter-card__heading">Stay updated!</h1>
+        <p class="newsletter-card__description">
+          Join 60,000+ product managers receiving monthly updates on:
+        </p>
+        <ul class="newsletter-card__list">
+          <li>
+            Product discovery and building what matters
+          </li>
+          <li>
+            Measuring to ensure updates are a success
+          </li>
+          <li>
+            And much more!
+          </li>
+        </ul>
+        
+        <form class="newsletter-card__form" action="#" method="post" novalidate>
+          <!-- novalidate turns off automatic validation so we can style it ourselves -->
+          <!-- but it doesn't disable support for constraint validaton API, which I use in the js file -->
+          <div class="label-wrapper">
+            <label for="email">Email address</label>
+            <span id="email-error" class="hidden" role="alert">Valid email required</span>
+          </div>
+          
+          <input type="email" id="email" name="email" placeholder="email@company.com" required aria-describedby="email-error">
+          <button type="submit" class="standard-btn"><span>Subscribe to monthly newsletter</span></button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="subscribe-success hidden">
+      <div class="subscribe-success__body">
+        <img src="assets/images/icon-success.svg" alt="Subscription confirmed" class="subscribe-success__icon">
+        <h1 class="subscribe-success__heading">Thanks for subscribing!</h1>
+        <p class="subscribe-success__description">
+          A confirmation email has been sent to <strong class="subscribe-success__email">ash@loremcompany.com</strong>.
+          Please open it and click the button inside to confirm your subscription.
+        </p>
+      </div>
+
+      <button type="button" class="standard-btn" id="dismiss-btn"><span>Dismiss message</span></button>
+
+    </div>
+  </main>
+</body>
+</html>

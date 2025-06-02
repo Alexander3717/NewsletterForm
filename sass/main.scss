@@ -1,0 +1,317 @@
+@use "setup" as *;
+
+body {
+    background-color: $colors-blue-800;
+    @include flex(column);
+}
+
+main {
+    flex: 1; // stretches main across vertical axis of body
+    @include flex(column, center, center);
+}
+
+.newsletter-card {
+    width: 100%; // stretches card horizontally across main
+    flex: 1; // stretches card across vertical axis of main
+    // therefore fills the whole screen
+    @include flex(column);
+    background-color: $colors-white;
+
+    &__image {
+        flex-shrink: 0;
+        height: rem(284);
+        width: 100%;
+        background-image: url("assets/images/illustration-sign-up-mobile.svg");
+        background-size: cover;
+        background-position: center;
+        border-radius: 0 0 $spacing-200 $spacing-200;
+    }
+
+    &__body {
+        flex: 1;
+        @include flex(column); // to be able to always move the form to the bottom
+        padding: $spacing-500 $spacing-300 rem(44px) $spacing-300;
+    }
+
+    &__heading {
+        @include text-preset-1-mobile;
+        margin-bottom: $spacing-300;
+    }
+
+    &__description {
+        @include text-preset-2;
+        margin-bottom: $spacing-300;
+    }
+
+    &__list {
+        @include flex(column, $gap: $spacing-100);
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: $spacing-500;
+        @include text-preset-2;
+
+        li {
+            @include flex(row, $gap: $spacing-200);
+
+            &::before {
+                content: "";
+                flex-shrink: 0;
+                width: rem(21px);
+                height: rem(21px);
+                background-image: url("assets/images/icon-list.svg");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+    }
+
+    &__form {
+        margin-top: auto; // to always place it on the bottom of the card
+        width: 100%;
+
+        .label-wrapper {
+            @include flex(row, space-between);
+            margin-bottom: $spacing-100;
+        }
+
+        label[for="email"] {
+            @include text-preset-3;
+        }
+
+        #email-error {
+            @include text-preset-3;
+            color: $colors-red;
+        }
+
+        input[type="email"] {
+            @include text-preset-2;
+            width: 100%;
+            padding: $spacing-200 $spacing-300;
+            border: rem(1px) solid $colors-grey;
+            border-radius: $spacing-100;
+            margin-bottom: $spacing-300;
+            outline: none;
+
+            &::placeholder {
+                color: $colors-grey;
+            }
+
+            &:focus {
+                border-color: $colors-blue-800;
+            }
+
+            &.error {
+                color: $colors-red;
+                caret-color: $colors-blue-800; // so the cursor won't be red
+                border-color: $colors-red;
+                background-color: #FFE7E6;
+
+                &::placeholder {
+                    color: $colors-red;
+                }
+            }
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+}
+
+.standard-btn {
+    @include flex(row, center, center);
+    @include text-preset-2;
+    border: none;
+    color: $colors-white;
+    padding: $spacing-200 $spacing-300;
+    background-color: $colors-blue-800;
+    border-radius: $spacing-100;
+
+    cursor: pointer;
+
+    // for the gradient in active state
+    transition: box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+
+    &:focus-visible {
+        outline: rem(2px) solid $colors-blue-800;
+        outline-offset: rem(2px);
+    }
+
+    &::before { // for the gradient in active state
+        content: '';
+        position: absolute;
+        inset: -1px;
+        background: linear-gradient(90deg, #FF6A3A 0%, #FF527B 100%);
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    span {
+        position: relative;
+        z-index: 1;
+    }
+
+    // styles the submit button when the form is ready to be submitted
+    // and also styles dismiss button on hover
+    &.ready {
+        box-shadow: 0 rem(16px) rem(32px) 0 rgba(255, 97, 85, 0.50);
+
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+.subscribe-success {
+    width: 100%; // stretches card horizontally across viewport
+    flex: 1; // stretches card across vertical axis of main
+    // therefore fills the whole screen
+    @include flex(column, space-between, $gap: $spacing-400);
+    padding: 18vh $spacing-300 $spacing-900 $spacing-300;
+    background-color: $colors-white;
+
+    &__body {
+        @include flex(column, $gap: $spacing-400);
+    }
+
+    &__icon {
+        width: rem(64px);
+        height: rem(64px);
+    }
+
+    &__heading {
+        @include text-preset-1-mobile;
+    }
+
+    &__description {
+        @include text-preset-2;
+    }
+
+    &__email {
+        @include text-preset-2-bold;
+    }
+}
+
+@media (min-width: rem(480px)) {
+    body {
+        padding: $spacing-600;
+    }
+
+    .newsletter-card {
+        width: unset;
+        overflow: hidden;
+        border-radius: $spacing-200;
+
+        &__body {
+            padding-bottom: $spacing-300;
+        }
+    }
+
+    .subscribe-success {
+        width: unset;
+        max-width: rem(491px); // to match the newsletter card max width
+        padding-bottom: $spacing-300;
+        border-radius: $spacing-200;
+
+        &__heading {
+            max-width: 10ch; // to keep the heading nicely wrapped
+        }
+    }
+}
+
+@media (min-width: rem(768px)) {
+    .newsletter-card {
+        flex: none;
+        width: rem(608px);
+        padding: $spacing-500;
+        border-radius: rem(36px);
+
+        &__image {
+            border-radius: $spacing-200;
+            height: rem(358px);
+        }
+
+        &__body {
+            flex: none;
+            padding: $spacing-500 0 0 0;
+        }
+
+        &__heading {
+            @include text-preset-1;
+        }
+
+         &__list {
+            margin-bottom: $spacing-300;
+        }
+    }
+
+    .subscribe-success {
+        flex: none;
+        justify-content: flex-start;
+        gap: $spacing-400;
+        width: rem(504px);
+        margin: 0;
+
+        padding: $spacing-800;
+        border-radius: rem(36px);
+    }
+}
+
+@media (min-width: rem(1200px)) {
+    .newsletter-card {
+        @include flex(row-reverse, $align: center, $gap: $spacing-800);
+        padding: $spacing-400;
+        width: unset;
+        max-width: unset;
+
+        &__image {
+            flex-shrink: 0;
+
+            height: rem(593px);
+            width: rem(400px);
+            background-image: url("assets/images/illustration-sign-up-desktop.svg");
+            border-radius: $spacing-200;
+        }
+
+        &__body {
+            padding: 0;
+            // flex-basis: rem(376px); this caused issues in some browsers
+            width: rem(376px);
+        }
+
+        &__heading {
+            margin-bottom: $spacing-400;
+        }
+
+        &__description {
+            margin-bottom: $spacing-400;
+        }
+
+        &__list {
+            margin-bottom: $spacing-400;
+        }
+
+        &__form {
+            input[type="email"] {
+                margin-bottom: $spacing-300;
+            }
+        }
+    }
+
+    .standard-btn {
+        &:hover {
+            box-shadow: 0 rem(16px) rem(32px) 0 rgba(255, 97, 85, 0.50);
+
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
