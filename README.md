@@ -35,8 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [View solution on Frontend Mentor](https://www.frontendmentor.io/solutions/)
-- Live Site URL: [View Live Site](https://alexander3717.github.io/<repname>/)
+- Solution URL: [View solution on Frontend Mentor](https://www.frontendmentor.io/solutions/responsive-newsletter-sign-up-form-using-constraint-validation-api-8yqfI36gEF)
+- Live Site URL: [View Live Site](https://alexander3717.github.io/NewsletterForm/)
 
 ## My process
 
